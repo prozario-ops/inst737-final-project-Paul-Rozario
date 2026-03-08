@@ -3,16 +3,23 @@ import os
 from pathlib import  Path
 
 def extract():
+    """
+    extract() reads the raw CSV files from the data directory and loads them into pandas DataFrames.
+
+    Returns:
+        dict: A dictionary containing the loaded DataFrames for 'food', 'branded_food', 'nutrient', 'food_nutrient', and 'fmap'.
+    
+    """
+    # set project root and data directory
     project_root = Path(__file__).resolve().parents[2]
     data_dir= project_root / 'data'
-
+    # read CSV files into DataFrames
     food= pd.read_csv(data_dir / 'food.csv', low_memory=False)
     branded_food= pd.read_csv(data_dir / 'branded_food.csv', low_memory=False)
     nutrient= pd.read_csv(data_dir / 'nutrient.csv', low_memory=False)
-
     fmap = pd.read_csv(data_dir / 'FMAP.csv', low_memory=False)
-
-    nutrient_ids= [2047, 1003, 1004, 1005, 1063, 1079, 1089, 1087, 1093, 1092]
+    # food_nutrient can be large, so we read it in chunks and filter for relevant nutrients
+    nutrient_ids= [2047, 1003, 1004, 1005, 2000, 1079, 1089, 1087, 1093, 1092]
 
     chunks= []
 
@@ -24,7 +31,7 @@ def extract():
         chunks.append(filtered_chunk)
     food_nutrient= pd.concat(chunks, ignore_index=True)
     
-
+    # return all loaded DataFrames in a dictionary
     return {
         'food': food,
         'branded_food': branded_food,
