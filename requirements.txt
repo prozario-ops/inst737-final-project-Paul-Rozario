@@ -2,3 +2,5 @@ pandas
 os
 pathlib
 scikit-learn
+matplotlib
+seaborn

@@ -3,6 +3,7 @@ from src.etl.transform import transform
 from src.etl.load import load
 from src.analysis.model_1 import run_model as model_1
 from src.analysis.model_2 import run_model as model_2
+from src.vis.visualizations import run_visualizations as visualize_clusters
 
 def main():
 
@@ -41,11 +42,27 @@ def main():
     else:
         print("Data loading failed.")
 
-    # print("Running cereal clustering model...\n")
-    # model_1()
+    print("Running cereal clustering model...\n")
+    model_1()
+    if model_1 is not None:
+        print("\nCereal clustering model completed successfully.")
+    else:
+        print("\nCereal clustering model failed.")
 
-    # print("Running purchase trend model...\n")
-    # model_2()
+    print("Running purchase trend model...\n")
+    model_2()
+    if model_2 is not None:
+        print("\nPurchase trend model completed successfully.")
+    else:
+        print("\nPurchase trend model failed.")
+
+    print("Running visualizations...\n")
+    visualize_clusters()
+    if visualize_clusters is not None:
+        print("\nVisualizations completed successfully.")
+    else:        
+        print("\nVisualizations failed.")
+
 
     print("\nPipeline complete.")
 
