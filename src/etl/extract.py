@@ -12,7 +12,7 @@ def extract():
     """
     # set project root and data directory
     project_root = Path(__file__).resolve().parents[2]
-    data_dir= project_root / 'data/raw/usda_branded_food_FMAP'
+    data_dir= project_root / 'data/raw'
     # read CSV files into DataFrames
     food= pd.read_csv(data_dir / 'food.csv', low_memory=False)
     branded_food= pd.read_csv(data_dir / 'branded_food.csv', low_memory=False)

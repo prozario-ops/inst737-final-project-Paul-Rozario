@@ -115,9 +115,6 @@ def visualize_cluster_heatmap():
 
     df = pd.read_csv("data/models/clustering_results.csv")
 
-
-
-
     # Remove unrealistic values again
     df = df[
         (df["Total Sugars"] <= 60) &
@@ -136,9 +133,6 @@ def visualize_cluster_heatmap():
         "Sodium"
     ]
 
-
-
-
     cluster_summary = df.groupby("cluster_name")[nutrients].mean()
     # Heatmap
 
@@ -153,22 +147,13 @@ def visualize_cluster_heatmap():
         fmt=".1f"
     )
 
-
-
-
     plt.title("Average Nutrient Profile by Cereal Cluster")
-
 
     plt.ylabel("Cluster Type")
     plt.xlabel("Nutrients")
     plt.tight_layout()
     plt.savefig("data/outputs/cereal_cluster_heatmap.png")
     plt.show()
-
-
-
-
-
 
 def run_visualizations():
     """

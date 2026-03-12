@@ -1,4 +1,16 @@
 .venv/
 __pycache_/
 *.pyc
-data/
+
+# Ignore generated data
+data/models/*
+data/outputs/*
+data/processed/*
+data/raw/cereal_filtered.zip
+
+# Keep folder structure
+!data/models/.gitkeep
+!data/outputs/.gitkeep
+!data/processed/.gitkeep
+!data/raw/
+
