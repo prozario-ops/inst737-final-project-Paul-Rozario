@@ -40,19 +40,148 @@ def visualize_clusters():
     plt.tight_layout()
     plt.savefig("data/models/cereal_cluster_scatter.png")
     plt.show()
+def visualize_cluster_profiles():
+    """
+    Create bar charts to visualize the average nutrient profiles of the cereal clusters. This function loads the clustering results,
+    calculates the average values of key nutrients for each cluster, and generates bar charts to illustrate
+    the differences in nutritional profiles across clusters. The bar charts are saved for further analysis.
+        returns:
+            None (saves outputs to PNG files)  
+    """
+    # Load cluster summary
+    df = pd.read_csv("data/models/clustering_summary.csv")
+
+
+    df = df.reset_index()
+
+
+    # Bar chart of protein per cluster
+    plt.figure(figsize=(8,6))
+
+
+    sns.barplot(
+        data=df,
+        x="cluster_name",
+        y="Protein"
+    )
+
+
+    plt.title("Average Protein by Cereal Cluster")
+    plt.xticks(rotation=30)
+    plt.savefig("data/outputs/protein_cluster_bar.png")
+    plt.show()
+
+
+
+
+def visualize_trend():
+    """
+    Visualize the purchasing trend over time using a line plot. This function loads the FMAP trend results,
+    aggregates the purchase dollars by month, and creates a line plot to illustrate the trend in cereal
+    purchasing over time. The plot is saved for further analysis.
+        returns:
+            None (saves outputs to PNG files)
+    """
+    df = pd.read_csv("data/models/fmap_trend_results.csv")
+    df["date"] = pd.to_datetime(df["date"])
+
+
+    # Aggregate monthly spending
+    df = df.groupby("date")[["Purchase_dollars_wtd", "predicted"]].mean().reset_index()
+
+
+    plt.figure(figsize=(10,6))
+    plt.plot(df["date"], df["Purchase_dollars_wtd"], label="Actual Spending")
+    plt.plot(df["date"], df["predicted"], label="Trend", linewidth=3)
+    plt.title("Cereal Purchasing Trend Over Time")
+    plt.xlabel("Year")
+    plt.ylabel("Purchase Dollars")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig("data/outputs/cereal_trend.png")
+    plt.show()
+
+
+def visualize_cluster_heatmap():
+    """
+    Creates a heatmap to visualize the average nutrient profiles of the cereal clusters. This function loads the clustering results,
+    calculates the average values of key nutrients for each cluster, and generates a heatmap to illustrate
+    the differences in nutritional profiles across clusters. The heatmap is saved for further analysis.
+   
+        returns:
+            None (saves outputs to PNG files)
+
+    """
+
+    df = pd.read_csv("data/models/clustering_results.csv")
+
+
+
+
+    # Remove unrealistic values again
+    df = df[
+        (df["Total Sugars"] <= 60) &
+        (df["Protein"] <= 40)
+    ]
+
+
+    # Select nutrients for heatmap
+   
+    nutrients = [
+        "Protein",
+        "Total lipid (fat)",
+        "Carbohydrate",
+        "Total Sugars",
+        "Fiber",
+        "Sodium"
+    ]
+
+
+
+
+    cluster_summary = df.groupby("cluster_name")[nutrients].mean()
+    # Heatmap
+
+
+    plt.figure(figsize=(10,6))
+
+
+    sns.heatmap(
+        cluster_summary,
+        annot=True,
+        cmap="coolwarm",
+        fmt=".1f"
+    )
+
+
+
+
+    plt.title("Average Nutrient Profile by Cereal Cluster")
+
+
+    plt.ylabel("Cluster Type")
+    plt.xlabel("Nutrients")
+    plt.tight_layout()
+    plt.savefig("data/outputs/cereal_cluster_heatmap.png")
+    plt.show()
+
+
+
+
 
 
 def run_visualizations():
     """
-    Run all visualizations. This function calls each visualization function (TO BE ADDED)
+    Run all visualizations. This function calls each visualization function
     to illustrate the results of the clustering and trend analysis. The visualizations are saved for further analysis.
         returns:
             None (saves outputs to PNG files)
     """
-
     visualize_clusters()
-
-
+    visualize_cluster_profiles()
+    visualize_trend()
+    visualize_cluster_heatmap()
+   
 
 if __name__ == "__main__":
     run_visualizations()

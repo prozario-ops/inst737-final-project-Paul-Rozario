@@ -8,7 +8,7 @@ from src.vis.visualizations import run_visualizations as visualize_clusters
 def main():
 
     data = extract()
-
+    print("running data extraction...\n")
     if data:
         print("Data extraction successful.\n")
 
@@ -41,6 +41,7 @@ def main():
         print("\nData loading successful.")
     else:
         print("Data loading failed.")
+        print("\nPipeline complete.")
 
     print("Running cereal clustering model...\n")
     model_1()
@@ -64,7 +65,7 @@ def main():
         print("\nVisualizations failed.")
 
 
-    print("\nPipeline complete.")
+
 
     
 
