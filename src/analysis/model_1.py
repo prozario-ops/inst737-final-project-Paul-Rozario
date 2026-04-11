@@ -1,7 +1,26 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+def evaluate_clustering(X, labels):
+    """
+    Evaluate the clustering results using silhouette score.
+    Args:
+        X (array-like): The feature data used for clustering.
+        labels (array-like): The cluster labels assigned to each data point.
+    Returns:
+        float: The silhouette score indicating the quality of the clustering.
+    """
+    score = silhouette_score(X, labels)
+    print(f"\nSilhouette Score: {score}")
 
+    #save result
+    eval_df = pd.DataFrame({
+        "metric": ["silhouette_score"],
+        "value": [score]
+    })
+    eval_df.to_csv("data/models/clustering_evaluation.csv", index=False)
+    return score
 
 def run_model():
     """
@@ -60,16 +79,18 @@ def run_model():
 
 
     df["cluster_name"] = df["cluster"].map(cluster_names)
+    
 
 
     # Evaluation
 
-
+    score = evaluate_clustering(X_scaled, kmeans.labels_)
     cluster_summary = df.groupby("cluster_name")[features].mean()
-
+   
 
     print("\nCluster Summary:\n")
     print(cluster_summary)
+    print(score)
 
     # Save outputs
   
@@ -83,6 +104,7 @@ def run_model():
         "data/models/clustering_summary.csv"
     )
 
+    
 
 
 
