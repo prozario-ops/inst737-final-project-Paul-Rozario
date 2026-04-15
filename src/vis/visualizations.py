@@ -38,7 +38,7 @@ def visualize_clusters():
     plt.ylabel("Sugar (g)")
     plt.legend(title="Cluster Type")
     plt.tight_layout()
-    plt.savefig("data/models/cereal_cluster_scatter.png")
+    plt.savefig("data/outputs/cereal_cluster_scatter.png")
     plt.show()
 def visualize_cluster_profiles():
     """
@@ -49,10 +49,10 @@ def visualize_cluster_profiles():
             None (saves outputs to PNG files)  
     """
     # Load cluster summary
-    df = pd.read_csv("data/models/clustering_summary.csv")
+    df =pd.read_csv("data/models/clustering_summary.csv")
 
 
-    df = df.reset_index()
+    df =df.reset_index()
 
 
     # Bar chart of protein per cluster
@@ -61,13 +61,11 @@ def visualize_cluster_profiles():
 
     sns.barplot(
         data=df,
-        x="cluster_name",
-        y="Protein"
+        x="cluster_name" ,
+    y="Protein"
     )
-
-
     plt.title("Average Protein by Cereal Cluster")
-    plt.xticks(rotation=30)
+    plt.xticks(rotation=15)
     plt.savefig("data/outputs/protein_cluster_bar.png")
     plt.show()
 
@@ -116,10 +114,7 @@ def visualize_cluster_heatmap():
     df = pd.read_csv("data/models/clustering_results.csv")
 
     # Remove unrealistic values again
-    df = df[
-        (df["Total Sugars"] <= 60) &
-        (df["Protein"] <= 40)
-    ]
+    df = df.copy()
 
 
     # Select nutrients for heatmap
@@ -130,7 +125,8 @@ def visualize_cluster_heatmap():
         "Carbohydrate",
         "Total Sugars",
         "Fiber",
-        "Sodium"
+        "serving_size_grams",
+       # "Sodium"
     ]
 
     cluster_summary = df.groupby("cluster_name")[nutrients].mean()
@@ -155,6 +151,57 @@ def visualize_cluster_heatmap():
     plt.savefig("data/outputs/cereal_cluster_heatmap.png")
     plt.show()
 
+def visualize_cluster_counts():
+    """
+    Visualize the number of cereals in each cluster.
+    args:        None
+    returns:        None (saves output to PNG file)
+    """
+
+    df = pd.read_csv("data/models/clustering_results.csv")
+
+    counts = df["cluster_name"].value_counts().reset_index()
+    counts.columns = ["cluster_name", "count"]
+
+    plt.figure(figsize=(8,6))
+
+    sns.barplot(
+        data=counts,
+        x="cluster_name",
+        y="count"
+    )
+
+    plt.title("Number of Cereals per Cluster")
+    plt.xlabel("Cluster Type")
+    plt.ylabel("Count")
+    plt.xticks(rotation=15)
+    plt.tight_layout()
+    plt.savefig("data/outputs/cluster_counts.png")
+    plt.show()
+
+def visualize_nutrient_distribution():
+    """
+    Visualize distribution of key nutrients by cluster.
+    args:        None
+    returns:        None (saves output to PNG file) 
+    """
+# Load data
+    df =pd.read_csv("data/models/clustering_results.csv")
+
+    plt.figure(figsize=(10,6))
+ # Boxplot of sugar distribution by cluster
+    sns.boxplot(
+        data=df,
+        x="cluster_name" ,
+        y="Total Sugars"
+    )
+
+    plt.title("Sugar Distribution by Cluster")
+    plt.xticks(rotation=15)
+    plt.tight_layout()
+    plt.savefig("data/outputs/sugar_distribution.png")
+    plt.show()
+
 def run_visualizations():
     """
     Run all visualizations. This function calls each visualization function
@@ -166,6 +213,8 @@ def run_visualizations():
     visualize_cluster_profiles()
     visualize_trend()
     visualize_cluster_heatmap()
+    visualize_cluster_counts()
+    visualize_nutrient_distribution()
    
 
 if __name__ == "__main__":
