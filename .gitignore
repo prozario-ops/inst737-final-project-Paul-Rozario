@@ -11,6 +11,7 @@ pipeline.log
 
 # Keep folder structure
 !data/models/.gitkeep
+!data/models/model_evaluation/.gitkeep
 !data/outputs/.gitkeep
 !data/processed/.gitkeep
 !data/raw/
