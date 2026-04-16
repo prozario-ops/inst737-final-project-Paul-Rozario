@@ -3,7 +3,10 @@ __pycache_/
 *.pyc
 
 # Ignore generated data
-data/models/*
+data/models/clustering_results.csv
+data/models/clustering_summary.csv
+data/models/fmap_trend_results.csv
+data/models/model_evaluation/*
 data/outputs/*
 data/processed/*
 data/raw/cereal_filtered.zip
