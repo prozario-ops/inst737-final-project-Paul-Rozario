@@ -11,6 +11,8 @@ def extract():
         dict: A dictionary containing the loaded DataFrames for 'food', 'branded_food', 'nutrient', 'food_nutrient', and 'fmap'.
     
     """
+    logging.info("extract.py extract() started")
+
     try:
         # set project root and data directory
         project_root = Path(__file__).resolve().parents[2]
@@ -48,7 +50,7 @@ def extract():
         
         
     except Exception as e:
-        print(f"Error during extraction: {e}")
+        logging.error(f"Error during extraction: {e}")
         return None
  
 

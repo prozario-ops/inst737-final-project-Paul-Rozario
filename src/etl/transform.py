@@ -13,6 +13,8 @@ def transform(data):
         cereal_df (pd.DataFrame): A DataFrame containing nutrient information for cereal foods, merged with descriptions and branded food metadata.
         fmap_df (pd.DataFrame): A DataFrame containing the FMAP price timeseries data, with a proper date column.
     """
+    logging.info("transform.py transform() started")
+
     try:
         food = data["food"]
         branded_food = data["branded_food"]
@@ -143,5 +145,5 @@ def transform(data):
         return cereal_df, fmap_df
         
     except Exception as e: 
-        print(f"Error in transformation: {e}")
+        logging.error(f"Error in transformation: {e}")
         raise

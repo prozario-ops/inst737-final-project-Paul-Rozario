@@ -1,3 +1,5 @@
+import logging
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -11,6 +13,7 @@ def visualize_clusters():
         returns:
             None (saves outputs to PNG files)
     """
+    logging.info("visualize_clusters() started")
 
     df = pd.read_csv("data/models/clustering_results.csv")
 
@@ -40,6 +43,7 @@ def visualize_clusters():
     plt.tight_layout()
     plt.savefig("data/outputs/cereal_cluster_scatter.png")
     plt.show()
+    logging.info("visualize_clusters() completed successfully") 
 def visualize_cluster_profiles():
     """
     Create bar charts to visualize the average nutrient profiles of the cereal clusters. This function loads the clustering results,
@@ -48,6 +52,8 @@ def visualize_cluster_profiles():
         returns:
             None (saves outputs to PNG files)  
     """
+    logging.info("visualize_cluster_profiles() started")
+
     # Load cluster summary
     df =pd.read_csv("data/models/clustering_summary.csv")
 
@@ -68,7 +74,7 @@ def visualize_cluster_profiles():
     plt.xticks(rotation=15)
     plt.savefig("data/outputs/protein_cluster_bar.png")
     plt.show()
-
+    logging.info("visualize_cluster_profiles() completed successfully")
 
 
 
@@ -80,6 +86,7 @@ def visualize_trend():
         returns:
             None (saves outputs to PNG files)
     """
+    logging.info("visualize_trend() started")
     df = pd.read_csv("data/models/fmap_trend_results.csv")
     df["date"] = pd.to_datetime(df["date"])
 
@@ -98,6 +105,7 @@ def visualize_trend():
     plt.tight_layout()
     plt.savefig("data/outputs/cereal_trend.png")
     plt.show()
+    logging.info("visualize_trend() completed successfully")
 
 
 def visualize_cluster_heatmap():
@@ -110,7 +118,7 @@ def visualize_cluster_heatmap():
             None (saves outputs to PNG files)
 
     """
-
+    logging.info("visualize_cluster_heatmap() started")
     df = pd.read_csv("data/models/clustering_results.csv")
 
     # Remove unrealistic values again
@@ -151,13 +159,14 @@ def visualize_cluster_heatmap():
     plt.savefig("data/outputs/cereal_cluster_heatmap.png")
     plt.show()
 
+    logging.info("visualize_cluster_heatmap() completed successfully")
 def visualize_cluster_counts():
     """
     Visualize the number of cereals in each cluster.
     args:        None
     returns:        None (saves output to PNG file)
     """
-
+    logging.info("visualize_cluster_counts() started")
     df = pd.read_csv("data/models/clustering_results.csv")
 
     counts = df["cluster_name"].value_counts().reset_index()
@@ -178,6 +187,7 @@ def visualize_cluster_counts():
     plt.tight_layout()
     plt.savefig("data/outputs/cluster_counts.png")
     plt.show()
+    logging.info("visualize_cluster_counts() completed successfully")
 
 def visualize_nutrient_distribution():
     """
@@ -185,6 +195,7 @@ def visualize_nutrient_distribution():
     args:        None
     returns:        None (saves output to PNG file) 
     """
+    logging.info("visualize_nutrient_distribution() started")
 # Load data
     df =pd.read_csv("data/models/clustering_results.csv")
 
@@ -201,6 +212,7 @@ def visualize_nutrient_distribution():
     plt.tight_layout()
     plt.savefig("data/outputs/sugar_distribution.png")
     plt.show()
+    logging.info("visualize_nutrient_distribution() completed successfully")
 
 def run_visualizations():
     """
@@ -215,7 +227,9 @@ def run_visualizations():
     visualize_cluster_heatmap()
     visualize_cluster_counts()
     visualize_nutrient_distribution()
+    
    
 
 if __name__ == "__main__":
     run_visualizations()
+

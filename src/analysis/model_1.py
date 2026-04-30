@@ -16,6 +16,7 @@ def run_model():
     """
 
     # load processed dataset
+    logging.info("model_1.py run_model() started")
 
     df = pd.read_csv("data/processed/cereal_nutrients.csv")
 
@@ -60,8 +61,8 @@ def run_model():
         columns=features
     )
 
-    print("\nCluster Centers\n")
-    print(centers)
+    logging.info("Cluster Centers")
+    logging.info(centers)
 
     
     # improved cluster naming logic based on nutrient profiles
@@ -90,8 +91,8 @@ def run_model():
     
 
 
-    print("\nCluster Summary:\n")
-    print(cluster_summary)
+    logging.info("Cluster Summary:")
+    logging.info(cluster_summary)
     score = evaluate_clustering(X_scaled, kmeans.labels_)
    # print(score)
     if score>.2:
@@ -122,13 +123,13 @@ def evaluate_clustering(X, labels):
     """
     #calculate silhouette score
     score = silhouette_score(X, labels)
-    print(f"\nSilhouette Score: {score}")
+    logging.info(f"\nSilhouette Score: {score}")
     if score > 0.5:
-        print("Clustering is good (score > 0.5). This shows that cereals are well clustered based on their nutritional profiles.")
+        logging.info("Clustering is good (score > 0.5). This shows that cereals are well clustered based on their nutritional profiles.")
     elif score > 0.25:
-        print("Clustering is moderate (score between 0.25 and 0.5). This shows that cereals are somewhat clustered based on their nutritional profiles.")
+        logging.info("Clustering is moderate (score between 0.25 and 0.5). This shows that cereals are somewhat clustered based on their nutritional profiles.")
     else:
-        print("Clustering is poor (score <= 0.25). This shows that cereals are not well clustered based on their nutritional profiles. ")
+        logging.info("Clustering is poor (score <= 0.25). This shows that cereals are not well clustered based on their nutritional profiles. ")
 
     #save result
     eval_df = pd.DataFrame({

@@ -20,6 +20,7 @@ def run_model():
             None (saves outputs to CSV files)
     """
     #load transformed data
+    logging.info("model_2.py run_model() started")
 
 
     df = pd.read_csv("data/processed/cereal_price_timeseries.csv")
@@ -45,7 +46,7 @@ def run_model():
 
     slope = model.coef_[0]
 
-    print("\nTrend slope:", slope)
+    logging.info(f"Trend slope: {slope}")
 
     # Save output
     
@@ -71,20 +72,20 @@ def evaluate_trend(y_true, y_pred):
     r2 = r2_score(y_true, y_pred)
     rmse =np.sqrt(mean_squared_error(y_true, y_pred))
     # print evaluation results
-    print(f"\nR2: {r2}")
+    logging.info(f"R2: {r2}")
     if r2 > 0.7:
-        print("(Good fit, this indicates a strong trend in purchase dollars over time)")
+        logging.info("(Good fit, this indicates a strong trend in purchase dollars over time)")
     elif r2 > 0.4:
-        print("(Moderate fit, this indicates a moderate trend in purchase dollars over time)")
+        logging.info("(Moderate fit, this indicates a moderate trend in purchase dollars over time)")
     else:
-        print("(Poor fit, this indicates a weak or no trend in purchase dollars over time)")
-    print(f"RMSE: {rmse}")
+        logging.info("(Poor fit, this indicates a weak or no trend in purchase dollars over time)")
+    logging.info(f"RMSE: {rmse}")
     if rmse < 1000:
-        print("(Good fit, this indicates that the model's predictions are close to the actual values)")
+        logging.info("(Good fit, this indicates that the model's predictions are close to the actual values)")
     elif rmse < 5000:
-        print("(Moderate fit, this indicates that the model's predictions are moderately close to the actual values)")
+        logging.info("(Moderate fit, this indicates that the model's predictions are moderately close to the actual values)")
     else:
-        print("(Poor fit, this indicates that the model's predictions are not close to the actual values). ")
+        logging.info("(Poor fit, this indicates that the model's predictions are not close to the actual values). ")
     # Save evaluation results to CSV
     eval_df= pd.DataFrame({
         "metric":["r2", "rmse"],
