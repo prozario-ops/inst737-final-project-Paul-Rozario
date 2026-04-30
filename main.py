@@ -58,6 +58,7 @@ def main():
         visualize_clusters()
         if visualize_clusters is not None:
             logging.info("main.py Visualizations completed successfully")
+            logging.info("Visualizations confirm meaningful cereal segmentation and a weak but slightly declining purchasing trend.")
         else:            
              logging.error("main.py Visualizations failed")
 

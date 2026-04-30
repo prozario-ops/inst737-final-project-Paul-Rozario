@@ -62,7 +62,7 @@ def run_model():
     )
 
     logging.info("Cluster Centers")
-    logging.info(centers)
+    logging.info("\n" + centers.to_string())
 
     
     # improved cluster naming logic based on nutrient profiles
@@ -92,7 +92,7 @@ def run_model():
 
 
     logging.info("Cluster Summary:")
-    logging.info(cluster_summary)
+    logging.info("\n" + cluster_summary.to_string())
     score = evaluate_clustering(X_scaled, kmeans.labels_)
    # print(score)
     if score>.2:

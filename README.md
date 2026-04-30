@@ -215,7 +215,7 @@ Running the pipeline will:
 5. Generate visualizations
 6. Save model outputs to the data directory
 
-
+View pipeline progress in pipeline.log
 ---
 
 
@@ -231,6 +231,7 @@ inst737-final-project-Paul-Rozario/
 README.md
 requirements.txt
 main.py
+pipeline.log
 
 
 src/

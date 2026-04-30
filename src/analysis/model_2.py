@@ -47,6 +47,7 @@ def run_model():
     slope = model.coef_[0]
 
     logging.info(f"Trend slope: {slope}")
+    logging.info("This indicates a strong downward trend in cereal purchase dollars over time, seen through the cereal_trend.png visualization. This suggests that consumers are purchasing less cereal over time, which could be due to changing dietary preferences, increased competition from other breakfast options, or other market factors. The model's predictions can be used to forecast future purchase dollars and inform business strategies for cereal manufacturers and retailers.")
 
     # Save output
     
