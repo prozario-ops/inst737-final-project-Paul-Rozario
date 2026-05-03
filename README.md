@@ -65,17 +65,6 @@ Together, these datasets allow the project to analyze:
 * **Product attributes** (nutrition profiles)
 * **Consumer purchasing behavior** (spending trends)
 
-### Key Updates (Part 3 Check-In)
-
-- Added model evaluation metrics
-  - Silhouette Score for clustering
-  - R² and RMSE for regression
-- Implemented outlier handling for nutrient features
-- Improved cluster labeling logic based on actual centroid values
-- Added logging and error handling across pipeline stages
-- Created evaluation outputs stored in `/data/models/model_evaluation/`
-- Refined clustering to improve interpretability and separation
-
 
 ### Techniques Employed
 
