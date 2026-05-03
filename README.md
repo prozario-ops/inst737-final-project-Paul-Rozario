@@ -117,10 +117,7 @@ Follow these steps to run the project locally.
 git clone https://github.com/prozario-ops/inst737-final-project-Paul-Rozario.git
 cd inst737-final-project-Paul-Rozario
 ```
-```
-make sure to switch to the test branch as it may default to the main branch. This can be switched by clicking
-main at the bottom left of the screen, and clicking test. Once done, proceed with the following steps:
-```
+
 ### 2. Create a Virtual Environment
 
 
